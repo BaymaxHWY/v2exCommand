@@ -25,8 +25,10 @@ func ShowFile(spath string, tag string) {
 		if strings.Contains(f.Name(), tag) {
 			data := ReadFromFile(path + f.Name())
 			posts := UnMarshalJson(data)
-			fmt.Println(posts)
-			fmt.Printf("读出%s", f.Name())
+			for _, p := range posts {
+				p.Show()
+			}
+			fmt.Printf("读出文件%s", f.Name())
 			fmt.Println()
 		}
 	}
@@ -34,7 +36,7 @@ func ShowFile(spath string, tag string) {
 
 // 命令处理
 // -w 爬取并写入文件；-r 读取文件并打印； -t 定时任务
-// 1. c creative; 2. p play;3. a apple;4. j jobs;5. t 或者 "" tech
+// 1. c creative; 2. p play;3. a apple;4. j jobs;5. t  tech
 func HandleCommand(args []string) (tag string, flag int) {
 	switch args[1] {
 	case "-w":
